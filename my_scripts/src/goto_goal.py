@@ -20,6 +20,6 @@ class node:
             self.pose = msg
             print(self.pose)
             
-    if __name__ == "__main__":
-        x = node()
+if __name__ == "__main__":
+    x = node()
         
