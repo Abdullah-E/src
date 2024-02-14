@@ -16,10 +16,15 @@ class node:
         self.msg = Twist()
         self.rate = rospy.Rate(10)
         
-        def callback(self, msg):
-            self.pose = msg
-            print(self.pose)
+    def callback(self, msg):
+        self.pose = msg
+        
+    def print_pose(self):
+        print(self.pose)
             
-    if __name__ == "__main__":
+if __name__ == "__main__":
+    try:
         x = node()
+    except rospy.ROSInterruptException:
+        pass
         
