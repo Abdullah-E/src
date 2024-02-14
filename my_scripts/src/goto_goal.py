@@ -21,10 +21,13 @@ class node:
         
     def print_pose(self):
         print(self.pose)
+        self.rate.sleep()
             
 if __name__ == "__main__":
     try:
         x = node()
+        while not rospy.is_shutdown():
+            x.print_pose()
     except rospy.ROSInterruptException:
         pass
         
