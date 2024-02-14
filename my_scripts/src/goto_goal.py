@@ -20,6 +20,7 @@ class node:
         self.pose = msg
         
     def print_pose(self):
+        print("x: ", self.pose.pose.position.x)
         print(self.pose)
         self.rate.sleep()
             
