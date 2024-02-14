@@ -49,8 +49,8 @@ class node:
         
         goal_yaw = atan2(goal_pose.position.y-self.position.y, goal_pose.position.x- self.position.x)
         angle_err = goal_yaw-self.angles['yaw']
-        while angle_err >= 0.05:
-            vel_msg.angular.z = angle_err*0.5
+        while angle_err >= 0.005:
+            vel_msg.angular.z = angle_err*0.2
             goal_yaw = atan2(goal_pose.position.y-self.position.y, goal_pose.position.x- self.position.x)
             angle_err = goal_yaw-self.angles['yaw']
             self.pub.publish(vel_msg)
@@ -59,7 +59,7 @@ class node:
         print("reached angle")
         
         dist_err = self.euclidean_distance(goal_pose.position)
-        while dist_err >= 0.05:
+        while dist_err >= 0.1:
             vel_msg.linear.x = 0.5*dist_err
             self.pub.publish(vel_msg)
             dist_err = self.euclidean_distance(goal_pose.position)
