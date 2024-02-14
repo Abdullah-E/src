@@ -18,5 +18,4 @@ class node:
         
         def callback(self, msg):
             self.pose = msg
-            self.orientation_list = [self.pose.orientation.x, self.pose.orientation.y, self.pose.orientation.z, self.pose.orientation.w](roll, pitch, yaw) = euler_from_quaternion(self.orientation_list)
-            
+            print(self.pose)            
