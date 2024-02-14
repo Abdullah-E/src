@@ -32,8 +32,8 @@ class node:
     
     def move2goal(self):
         goal_pose = Pose()
-        goal_pose.x = float(input("Set your x goal: "))
-        goal_pose.y = float(input("Set your y goal: "))
+        goal_pose.position.x = float(input("Set your x goal: "))
+        goal_pose.position.y = float(input("Set your y goal: "))
 
         vel_msg = Twist()
         vel_msg.angular.x = 0
@@ -46,11 +46,11 @@ class node:
         # curr_yaw = self.angles['yaw'] 
         
         
-        goal_yaw = atan2(goal_pose.y-self.position.y, goal_pose.x- self.position.x)
+        goal_yaw = atan2(goal_pose.position.y-self.position.y, goal_pose.position.x- self.position.x)
         angle_err = goal_yaw-self.angles['yaw']
         while angle_err >= 0.05:
             vel_msg.angular.z = angle_err*0.5
-            goal_yaw = atan2(goal_pose.y-self.position.y, goal_pose.x- self.position.x)
+            goal_yaw = atan2(goal_pose.position.y-self.position.y, goal_pose.position.x- self.position.x)
             angle_err = goal_yaw-self.angles['yaw']
             self.pub.publish(vel_msg)
             self.rate.sleep()
