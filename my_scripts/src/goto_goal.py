@@ -29,7 +29,8 @@ class node:
         euler_angs = euler_from_quaternion([self.orient.x, self.orient.y, self.orient.z, self.orient.w])
         for i, n in enumerate(self.angle_names):
             self.angles[n] = euler_angs[i]
-    
+    def euclidean_distance(self, pose):
+        return sqrt(pow((pose.x - self.position.x), 2) + pow((pose.y - self.position.y), 2))
     def move2goal(self):
         goal_pose = Pose()
         goal_pose.position.x = float(input("Set your x goal: "))
@@ -54,9 +55,19 @@ class node:
             angle_err = goal_yaw-self.angles['yaw']
             self.pub.publish(vel_msg)
             self.rate.sleep()
-        
         vel_msg.angular.z = 0
-        print("reached")
+        print("reached angle")
+        
+        dist_err = self.euclidean_distance(goal_pose.position)
+        while dist_err >= 0.05:
+            vel_msg.linear.x = 0.5*dist_err
+            self.pub.publish(vel_msg)
+            dist_err = self.euclidean_distance(goal_pose.position)
+            self.rate.sleep()
+        vel_msg.linear.x = 0
+        self.pub.publish(vel_msg)
+        print("reached goal")
+        
         rospy.spin()
         
     def print_pose(self):
