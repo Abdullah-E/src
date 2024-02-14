@@ -5,7 +5,7 @@ from geometry_msgs.msg import Twist
 
 class node:
     def __init__(self):
-        rospy.init_node('circle_publisher', anonymous=True)
+        rospy.init_node('stop_turt', anonymous=True)
         self.pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
         self.msg = Twist()
     
@@ -13,10 +13,8 @@ class node:
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             msg = Twist()
-            msg.linear.x = 0.5
-            msg.angular.z = 0.5
-            self.pub.publish(msg)
-            rate.sleep()
+            msg.linear.x = 0
+            msg.angular.z = 0
 if __name__ == "__main__":
     
     n = node()
