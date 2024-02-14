@@ -17,7 +17,7 @@ class node:
         self.rate = rospy.Rate(10)
         
     def callback(self, msg):
-        self.pose = msg
+        self.pose = msg.pose
         
     def print_pose(self):
         print("x: ", self.pose.pose.position.x)
