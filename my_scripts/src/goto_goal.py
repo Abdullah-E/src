@@ -18,4 +18,8 @@ class node:
         
         def callback(self, msg):
             self.pose = msg
-            print(self.pose)            
+            print(self.pose)
+            
+    if __name__ == "__main__":
+        x = node()
+        
